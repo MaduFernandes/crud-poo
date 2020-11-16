@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class AlunoResources {
+public class AlunoResources implements AlunoRepository{
 
     @Autowired
     AlunoRepository alunoRepository;
@@ -20,8 +20,8 @@ public class AlunoResources {
 
     public void create() {
         Aluno newAluno = new Aluno();
-        newAluno.setNome("Daniel Ferreira");
-        newAluno.setCpf("46766507000");
+        newAluno.setNome("Daniela Ferreira");
+        newAluno.setDocumento("467665070022");
         newAluno.setCurso("Sistemas de Informação");
         newAluno.getMatricula();
 
@@ -33,5 +33,17 @@ public class AlunoResources {
 
         em.close();
         db.close();
+    }
+
+    public void findAll() {
+
+    }
+
+    public void update() {
+
+    }
+
+    public void destroy() {
+
     }
 }
