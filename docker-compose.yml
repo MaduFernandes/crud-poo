@@ -9,8 +9,6 @@ services:
       - "5432:5432"
     networks:
       - postgres-compose-network
-    volumes:
-      - /home/lucas/Documentos/reactit_gitlab/celer/data:/var/lib/postgresql/data 
       
   teste-pgadmin-compose:
     image: dpage/pgadmin4
