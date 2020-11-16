@@ -2,6 +2,9 @@ package br.com.oat.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Random;
 
 @Entity
 public class Aluno implements Serializable {
@@ -66,6 +69,18 @@ public class Aluno implements Serializable {
     }
 
     public String getMatricula() {
+        Integer semestre;
+
+        Random valorRandomico = new Random();
+        SimpleDateFormat dataFormatada = new SimpleDateFormat("yyyyMMddHHmmss");
+        Calendar data = Calendar.getInstance();
+        if (data.get(Calendar.MONTH) <= 6) {
+            semestre = 1;
+        } else {
+            semestre = 2;
+        }
+        matricula = dataFormatada.format(data.getTime()) + "-" + valorRandomico.nextInt(99) + "-" + semestre;
+
         return matricula;
     }
 
