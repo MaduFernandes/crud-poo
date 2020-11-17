@@ -7,5 +7,7 @@ public class Main {
     public static void main(String[] args) {
         AlunoResources aluno = new AlunoResources();
         aluno.create();
+        aluno.find();
+        aluno.destroy();
     }
 }

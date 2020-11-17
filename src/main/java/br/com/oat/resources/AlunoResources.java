@@ -2,15 +2,17 @@ package br.com.oat.resources;
 
 import br.com.oat.model.Aluno;
 import br.com.oat.repository.AlunoRepository;
-
 import br.com.oat.config.Message;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class AlunoResources implements AlunoRepository{
+
+    Aluno newAluno = new Aluno();
 
     @Autowired
     AlunoRepository alunoRepository;
@@ -19,9 +21,8 @@ public class AlunoResources implements AlunoRepository{
     EntityManager em = db.createEntityManager();
 
     public void create() {
-        Aluno newAluno = new Aluno();
-        newAluno.setNome("Daniela Ferreira");
-        newAluno.setDocumento("467665070022");
+        newAluno.setNome("Danilo Ferreira");
+        newAluno.setDocumento("44426965004");
         newAluno.setCurso("Sistemas de Informação");
         newAluno.getMatricula();
 
@@ -35,8 +36,9 @@ public class AlunoResources implements AlunoRepository{
         db.close();
     }
 
-    public void findAll() {
-
+    public void find() {
+        newAluno = em.find(Aluno.class, 7);
+        System.out.println(newAluno);
     }
 
     public void update() {
@@ -44,6 +46,12 @@ public class AlunoResources implements AlunoRepository{
     }
 
     public void destroy() {
-
+        em.getTransaction().begin();
+        Query query = em.createNativeQuery("DELETE FROM public.aluno WHERE documento =" + newAluno.getDocumento());
+        query.executeUpdate();
+        em.getTransaction().commit();
+        em.close();
+        db.close();
+        System.out.println(Message.DELETAR);
     }
 }
