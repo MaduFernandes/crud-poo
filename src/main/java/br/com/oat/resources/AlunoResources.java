@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import java.util.List;
 
 public class AlunoResources implements AlunoRepository{
