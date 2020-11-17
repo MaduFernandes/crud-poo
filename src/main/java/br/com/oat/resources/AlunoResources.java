@@ -4,7 +4,6 @@ import br.com.oat.model.Aluno;
 import br.com.oat.repository.AlunoRepository;
 import br.com.oat.config.Message;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,9 +12,6 @@ import javax.persistence.Query;
 public class AlunoResources implements AlunoRepository{
 
     Aluno newAluno = new Aluno();
-
-    @Autowired
-    AlunoRepository alunoRepository;
 
     EntityManagerFactory db = Persistence.createEntityManagerFactory("connection");
     EntityManager em = db.createEntityManager();
