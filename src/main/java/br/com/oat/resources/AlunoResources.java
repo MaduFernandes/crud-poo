@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+import java.util.List;
 
 public class AlunoResources implements AlunoRepository{
 
@@ -17,8 +19,8 @@ public class AlunoResources implements AlunoRepository{
     EntityManager em = db.createEntityManager();
 
     public void create() {
-        newAluno.setNome("Danilo Ferreira");
-        newAluno.setDocumento("44426965004");
+        newAluno.setNome("Michel Douglas");
+        newAluno.setDocumento("68578012201");
         newAluno.setCurso("Sistemas de Informação");
         newAluno.getMatricula();
 
@@ -32,9 +34,12 @@ public class AlunoResources implements AlunoRepository{
         db.close();
     }
 
-    public void find() {
-        newAluno = em.find(Aluno.class, 7);
-        System.out.println(newAluno);
+    public List<Aluno> findAll() {
+        em.getTransaction().begin();
+        Query consultar = em.createQuery("SELECT aluno FROM Aluno aluno");
+        List listar = consultar.getResultList();
+        em.close();
+        return listar;
     }
 
     public void update() {
@@ -43,11 +48,9 @@ public class AlunoResources implements AlunoRepository{
 
     public void destroy() {
         em.getTransaction().begin();
-        Query query = em.createNativeQuery("DELETE FROM public.aluno WHERE documento =" + newAluno.getDocumento());
-        query.executeUpdate();
+        Aluno excluirAluno = em.find(Aluno.class, 1);
+        em.remove(excluirAluno);
         em.getTransaction().commit();
-        em.close();
-        db.close();
         System.out.println(Message.DELETAR);
     }
 }
